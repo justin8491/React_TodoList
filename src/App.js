@@ -1,25 +1,18 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useRef, useCallback, useReducer } from "react";
+import { MdLabelImportant } from "react-icons/md";
+import TodoInsert from "./components/TodoInsert";
+import TodoList from "./components/TodoList";
+import TodoTemplate from "./components/TodoTemplate";
+import TodoModel from "./TodoModel";
 
-function App() {
+const App = () => {
+  const [todos, onInsert, onDelete, onToggle] = TodoModel();
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <TodoTemplate>
+      <TodoInsert onInsert={onInsert} />
+      <TodoList todos={todos} onDelete={onDelete} onToggle={onToggle} />
+    </TodoTemplate>
   );
-}
+};
 
 export default App;
